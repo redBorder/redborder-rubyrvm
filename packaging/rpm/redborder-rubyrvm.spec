@@ -79,6 +79,7 @@ BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgr
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
 #BuildRequires: patch readline procps-ng
 Requires: sed grep tar gzip bzip2 make file dialog
+Obsoletes: rvm
 Summary: Rvm and ruby for redborder platform
 
 %description
@@ -231,7 +232,7 @@ getent group rvm >/dev/null || groupadd -r rvm
 /etc/profile.d/rvm.sh
 
 %changelog
-* Thu Nov 17 2016 Carlos J. Mateos <cjmateos@redborder.com> - 1.27.0-2
-- Updated to latest version
-* Fri Jun 17 2016 Juan J. Prieto <jjprieto@redborder.com> - 1.27.0-1
-- Updated to latest version
+* Tue Nov 22 2016 Juan J. Prieto <jjprieto@redborder.com> - 0.0.2-1
+- Integrate all fix and latest gems. Also fix changelog in spec.
+* Fri Nov 18 2016 Juan J. Prieto <jjprieto@redborder.com> - 0.0.1-1
+- First commit and version
