@@ -213,9 +213,9 @@ chmod -R g+wxr $RPM_BUILD_ROOT/%{rvm_dir}
 
 # clean unicorn and /usr/local references
 ruby -p -i -e 'gsub(%r{#!.*/this/will/be/overwritten/or/wrapped/anyways/do/not/worry/ruby}, "#!/usr/bin/ruby")' \
-  $RPM_BUILD_ROOT/%{rvm_dir}/gems/ruby-%{ruby_version}@web/gems/unicorn*/bin/unicorn*
+  $RPM_BUILD_ROOT/%{rvm_dir}/gems/ruby-%{ruby_version}@web/gems/unicorn*/bin/unicorn* &>/dev/null
 for f in $(grep -l -r "#\!\s*/usr/local/bin/ruby" $RPM_BUILD_ROOT/%{rvm_dir}); do
-        ruby -p -i -e 'gsub(%r{#!.*/usr/local/bin/ruby}, "#!/usr/bin/ruby")' $f
+        ruby -p -i -e 'gsub(%r{#!.*/usr/local/bin/ruby}, "#!/usr/bin/ruby")' $f &>/dev/null
 done
 
 %clean
@@ -225,6 +225,7 @@ getent group rvm >/dev/null || groupadd -r rvm
 
 %post
 /bin/bash --login -c "rvm use %{ruby_version} --default" || :
+/bin/bash --login -c "rvm gemset use global --default" || :
 
 %files
 %{rvm_dir}
