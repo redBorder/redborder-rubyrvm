@@ -74,6 +74,30 @@ Source59: snmp-1.2.0.gem
 Source60: snmp4em-1.1.2.gem
 Source61: upsert-2.1.2.gem
 Source62: toastr-rails-1.0.3.gem
+Source63: tzinfo-0.3.51.gem
+Source64: mime-types-1.25.1.gem
+Source65: mail-2.6.3.gem
+Source66: addressable-2.4.0.gem
+Source67: mini_portile2-2.0.0.gem
+Source68: nokogiri-1.6.7.2.gem
+Source69: better_errors-0.8.0.gem
+Source70: debug_inspector-0.0.2.gem
+Source71: binding_of_caller-0.7.2.gem
+Source72: xpath-2.0.0.gem
+Source73: capybara-2.6.2.gem
+Source74: ffi-1.9.10.gem
+Source75: mixlib-log-1.6.0.gem
+Source76: rspec-support-3.4.1.gem
+Source77: rspec-core-3.4.4.gem
+Source78: rspec-expectations-3.4.0.gem
+Source79: rspec-mocks-3.4.1.gem
+Source80: mixlib-authentication-1.4.0.gem
+Source81: mixlib-cli-1.5.0.gem
+Source82: mixlib-config-2.2.1.gem
+Source83: mixlib-shellout-2.2.6.gem
+Source84: net-ssh-2.6.8.gem
+Source85: net-dhcp-1.3.2.gem
+Source86: ohai-8.0.1.gem
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel git
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
@@ -192,6 +216,32 @@ default=ruby-%{ruby_version}
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem specific_install https://github.com/redBorder/ruby-druid.git rb-0.1.9
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem specific_install https://github.com/redBorder/audited.git
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem specific_install https://github.com/redBorder/wash_out.git
+
+# some dependencies
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/tzinfo-*.gem --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mime-types-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mail-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/addressable-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mini_portile2-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/nokogiri-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/better_errors-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/debug_inspector-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/binding_of_caller-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/xpath-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/capybara-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ffi-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mixlib-log-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/rspec-support-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/rspec-core-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/rspec-expectations-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/rspec-mocks-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mixlib-authentication-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mixlib-cli-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mixlib-config-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mixlib-shellout-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/net-ssh-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/net-dhcp-*.gem  --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ohai-*.gem  --no-ri
 
 # Remove downloaded gems and files after compilation
 rm -rf %{rvm_dir}/src/*
