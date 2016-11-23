@@ -26,7 +26,7 @@ Source11: symmetric-encryption-3.8.3.gem
 Source12: arp_scan-0.1.0.gem
 Source13: knife-acl-1.0.3.gem
 Source14: chef-12.0.3.gem
-Source15: rake-10.1.0.gem
+Source15: rake-10.5.0.gem
 Source16: mrdialog-1.0.3.gem
 Source17: net-ip-0.0.8.gem
 Source18: backports-3.6.8.gem
