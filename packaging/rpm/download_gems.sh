@@ -7,8 +7,7 @@ RUBY_VERSION=${RUBY_VERSION:="2.2.4"}
 
 mkdir -p SOURCES
 
-# knife-acl and chef gem
-[ ! -f SOURCES/knife-acl-1.0.3.gem ] && wget --no-check-certificate https://rubygems.org/downloads/knife-acl-1.0.3.gem -O SOURCES/knife-acl-1.0.3.gem
+# Patch chef gem
 if [ ! -f SOURCES/chef-12.0.3.gem ]; then
 	wget --no-check-certificate https://rubygems.org/downloads/chef-12.0.3.gem -O SOURCES/chef-12.0.3.gem
 	# Patch chef gem
