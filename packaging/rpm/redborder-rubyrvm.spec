@@ -98,6 +98,7 @@ Source83: mixlib-shellout-2.2.6.gem
 Source84: net-ssh-2.6.8.gem
 Source85: net-dhcp-1.3.2.gem
 Source86: ohai-8.0.1.gem
+Source87: zk-1.9.6.gem
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel git
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
@@ -158,7 +159,7 @@ default=ruby-%{ruby_version}
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/knife-acl-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/rake-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/mrdialog-*.gem --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install mrdialog --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/net-ip-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/backports-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/specific_install-*.gem --no-ri
@@ -217,7 +218,7 @@ default=ruby-%{ruby_version}
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem specific_install https://github.com/redBorder/audited.git
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem specific_install https://github.com/redBorder/wash_out.git
 
-# some dependencies
+# web dependencies
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/tzinfo-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mime-types-*.gem  --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mail-*.gem  --no-ri
@@ -242,6 +243,9 @@ default=ruby-%{ruby_version}
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/net-ssh-*.gem  --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/net-dhcp-*.gem  --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ohai-*.gem  --no-ri
+
+# other dependencies
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/zk-*.gem  --no-ri
 
 # Remove downloaded gems and files after compilation
 rm -rf %{rvm_dir}/src/*
