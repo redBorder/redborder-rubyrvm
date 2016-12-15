@@ -1,0 +1,155 @@
+source 'https://rubygems.org'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem "rails", "4.0.12"
+gem "railties", "4.0.12"
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',        '~> 4.0.5'
+  gem 'coffee-rails',      '~> 4.0.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', platforms: :ruby
+
+  gem 'uglifier', '~> 2.2.1'
+end
+
+# New relic
+gem 'newrelic_rpm'
+
+gem 'jquery-rails', '~> 3.1.2'
+
+gem 'jquery-ui-rails', '~> 5.0.3'
+
+# Devise rails4 branch
+gem "devise", "~> 3.5.10"
+gem "devise_ldap_authenticatable", git: "https://github.com/redBorder/devise_ldap_authenticatable.git"
+
+gem "simple_form", "~> 3.1.0"
+
+gem "will_paginate", "~> 3.0.4"
+
+# gem "acts_as_tree", "~> 1.3.0"
+gem "awesome_nested_set", "~> 3.0.2"
+
+gem 'daemons', '~> 1.1.9'
+
+gem "delayed_job_active_record", "~> 4.0.0"
+
+gem 'chef', '~> 12.0.3'
+gem 'ohai', '~> 8.0.1'
+
+gem "net-ssh", "~> 2.6.7"
+gem "net-scp", "~> 1.1.2"
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks', " ~> 1.3.1"
+
+# Throws a ready event when turbolinks finishes loading a page
+gem 'jquery-turbolinks', "~> 0.2.1"
+
+# Added logs on production
+gem "lograge"
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.0.1'
+
+gem 'ruby-druid', git: 'https://github.com/redBorder/ruby-druid.git', branch: 'rb-0.1.9' #'~> 0.1.9'
+
+gem 'druid_config', '~> 0.5.0'
+
+gem 'oauth2', '~> 1.0'
+gem 'zendesk_api', '~> 1.12.1'
+
+gem 'unicorn', '~> 5.0.1'
+
+gem "therubyracer", "~> 0.11.4"
+
+gem "getopt", "~> 1.4.1"
+
+gem "netaddr", "~> 1.5.0"
+
+gem 'geoip', "~> 1.3.5"
+
+gem 'zeroclipboard-rails', "~> 0.1.1"
+
+gem 'countries',      "~> 0.9.3"
+
+gem 'whois', "~> 3.4.1"
+gem 'net-dns', "~> 0.8.0"
+
+gem "aws-sdk", "~> 1.61.0"
+gem "aws-s3", "~> 0.6.3"
+
+gem "paperclip", "~> 4.3.7"
+gem 'posix-spawn', '~> 0.3.11'
+
+gem "dalli", "~> 2.7.0"
+
+gem "dimensions", "~> 1.3.0"
+
+gem "jscolor-rails", "~> 1.4.2.1"
+
+gem "audited-activerecord", git: "https://github.com/redBorder/audited.git"
+
+gem "timecop", "~> 0.7.1"
+
+gem 'pg', '~> 0.17.1'
+
+gem 'pry-rails', group: [:development, :test]
+
+# Gem to push mobile notifications
+gem 'gcm', '~> 0.0.7'
+
+gem "ditto_code", "~> 0.3.5"
+
+gem 'wicked_pdf', '~> 0.11.0'
+
+gem 'wash_out', git: 'https://github.com/redBorder/wash_out.git'
+
+gem 'rmagick', '~> 2.13.4'
+
+gem 'snmp', '~> 1.2.0'
+
+gem 'snmp4em'
+
+gem 'upsert', '~> 2.1.2'
+
+group :development do
+  gem "better_errors", "~> 0.8.0"
+  gem "binding_of_caller", "~> 0.7.1"
+  gem "quiet_assets"
+  gem "rails_db_info", "~> 0.1.7"
+  gem 'pry-nav'
+  gem "mail_view", "~> 2.0.4"
+end
+
+group :test do
+  gem 'sqlite3'
+  gem 'shoulda'
+  gem 'mocha', require: false
+  gem 'capybara', '~> 2.6.2'
+  gem 'poltergeist'
+  gem 'test-unit'
+  gem 'simplecov', require: false
+end
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano', group: :development
+
+# To use debugger
+# gem 'debugger'
+
+# Load plugins' Gemfiles
+Dir.glob File.expand_path("../lib/modules/*/Gemfile", __FILE__) do |file|
+  puts "Loading #{file} ..." if $DEBUG # `ruby -d` or `bundle -v`
+  eval_gemfile file
+end
