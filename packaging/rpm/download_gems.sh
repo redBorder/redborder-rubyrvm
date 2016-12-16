@@ -8,7 +8,7 @@ RUBY_VERSION=${RUBY_VERSION:="2.2.2"}
 mkdir -p SOURCES
 
 # knife and chef gem
-[ ! -f SOURCES/knife-acl-0.0.12.gem ] && wget --no-check-certificate https://rubygems.org/downloads/knife-acl-0.0.12.gem -O SOURCES/knife-acl-0.0.12.gem
+[ ! -f SOURCES/knife-acl-1.0.3.gem ] && wget --no-check-certificate https://rubygems.org/downloads/knife-acl-1.0.3.gem -O SOURCES/knife-acl-1.0.3.gem
 if [ ! -f SOURCES/chef-12.0.3.gem ]; then
 	wget --no-check-certificate https://rubygems.org/downloads/chef-12.0.3.gem -O SOURCES/chef-12.0.3.gem
 	# Patch chef gem
@@ -34,4 +34,3 @@ fi
 for vgem in $(cat list_rubygems.txt | grep -v "^#"); do
 	[ ! -f SOURCES/${vgem} ] && wget --no-check-certificate https://rubygems.org/downloads/${vgem} -O SOURCES/${vgem}
 done
-
