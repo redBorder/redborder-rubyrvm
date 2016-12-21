@@ -1,0 +1,18 @@
+source 'https://rubygems.org'
+
+# redborder-ng basic gems 
+
+gem 'system-getifaddrs', '~> 0.2.1'
+gem 'prettyprint', '~> 0.0.1'
+gem 'getopt', '~> 1.4.3'
+gem 'netaddr', '~> 1.5.1'
+gem 'json', '~> 1.8.3'
+gem 'arp_scan', '~> 0.1.0'
+gem 'rake', '~> 10.5.0'
+gem 'mrdialog', '~> 1.0.3'
+gem 'net-ip', '~> 0.0.8'
+gem 'backports', '~> 3.6.8'
+gem 'knife-acl', '~> 1.0.3'
+gem 'symmetric-encryption', '~> 3.8.3'
+gem 'zk', '~> 1.9.6' 
+

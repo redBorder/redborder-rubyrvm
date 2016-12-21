@@ -8,13 +8,13 @@ MOCK_CONFIG?= default
 
 RESULT_DIR?= pkgs
 
-RVM_VERSION?= 1.27.0
+RVMVERSION?= 1.27.0
 
-RUBY_VERSION?= 2.2.4
+RUBYVERSION?= 2.2.4
 
-BUNDLER_VERSION?= 1.12.5
+BUNDLERVERSION?= 1.12.5
 
-RUBYGEMS_VERSION?= 2.4.8
+RUBYGEMSVERSION?= 2.4.8
 
 all: rpm
 
@@ -31,17 +31,17 @@ archive: SOURCES
 build_prepare: archive
 	mkdir -p $(RESULT_DIR)
 	rm -f $(RESULT_DIR)/$(PACKAGE_NAME)*.rpm
-	env RVM_VERSION=$(RVM_VERSION) RUBY_VERSION=$(RUBY_VERSION) BUNDLER_VERSION=$(BUNDLER_VERSION) RUBYGEMS_VERSION=$(RUBYGEMS_VERSION) ./download_gems.sh; echo $?;
+	env RVMVERSION=$(RVMVERSION) RUBYVERSION=$(RUBYVERSION) BUNDLERVERSION=$(BUNDLERVERSION) RUBYGEMSVERSION=$(RUBYGEMSVERSION) ./download_gems.sh;
 
 srpm: build_prepare
 	/usr/bin/mock \
 		-r $(MOCK_CONFIG) \
 		--define "__version $(VERSION)" \
 		--define "__release $(BUILD_NUMBER)" \
-		--define "__rvmversion $(RVM_VERSION)" \
-		--define "__rubyversion $(RUBY_VERSION)" \
-		--define "__bundlerversion $(BUNDLER_VERSION)" \
-		--define "__rubygemsversion $(RUBYGEMS_VERSION)" \
+		--define "__rvmversion $(RVMVERSION)" \
+		--define "__rubyversion $(RUBYVERSION)" \
+		--define "__bundlerversion $(BUNDLERVERSION)" \
+		--define "__rubygemsversion $(RUBYGEMSVERSION)" \
 		--resultdir=$(RESULT_DIR) \
 		--buildsrpm \
 		--spec=${PACKAGE_NAME}.spec \
@@ -53,10 +53,10 @@ rpm: srpm
 		-r $(MOCK_CONFIG) \
 		--define "__version $(VERSION)"\
 		--define "__release $(BUILD_NUMBER)"\
-		--define "__rvmversion $(RVM_VERSION)" \
-		--define "__rubyversion $(RUBY_VERSION)" \
-		--define "__bundlerversion $(BUNDLER_VERSION)" \
-		--define "__rubygemsversion $(RUBYGEMS_VERSION)" \
+		--define "__rvmversion $(RVMVERSION)" \
+		--define "__rubyversion $(RUBYVERSION)" \
+		--define "__bundlerversion $(BUNDLERVERSION)" \
+		--define "__rubygemsversion $(RUBYGEMSVERSION)" \
 		--resultdir=$(RESULT_DIR) \
 		--rebuild $(RESULT_DIR)/$(PACKAGE_NAME)*.src.rpm
 	@echo "======= Binary RPMs now available in $(RESULT_DIR) ======="

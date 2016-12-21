@@ -1,14 +1,14 @@
 #!/bin/bash
 
-RVM_VERSION=${RVM_VERSION:="1.27.0"}
-BUNDLER_VERSION=${BUNDLER_VERSION:="1.12.5"}
-RUBYGEMS_VERSION=${RUBYGEMS_VERSION:="2.4.8"}
-RUBY_VERSION=${RUBY_VERSION:="2.2.2"}
+RVMVERSION=${RVMVERSION:="1.27.0"}
+BUNDLERVERSION=${BUNDLERVERSION:="1.12.5"}
+RUBYGEMSVERSION=${RUBYGEMSVERSION:="2.4.8"}
+RUBYVERSION=${RUBYVERSION:="2.2.4"}
 
 mkdir -p SOURCES
 
-# knife and chef gem
-[ ! -f SOURCES/knife-acl-1.0.3.gem ] && wget --no-check-certificate https://rubygems.org/downloads/knife-acl-1.0.3.gem -O SOURCES/knife-acl-1.0.3.gem
+cp Gemfile* SOURCES
+
 if [ ! -f SOURCES/chef-12.0.3.gem ]; then
 	wget --no-check-certificate https://rubygems.org/downloads/chef-12.0.3.gem -O SOURCES/chef-12.0.3.gem
 	# Patch chef gem
@@ -27,10 +27,9 @@ if [ ! -f SOURCES/chef-12.0.3.gem ]; then
 fi
 
 # Basic packages
-[ ! -f SOURCES/rvm-${RVM_VERSION}.tar.gz ] && wget --no-check-certificate https://github.com/rvm/rvm/archive/${RVM_VERSION}.tar.gz -O SOURCES/rvm-${RVM_VERSION}.tar.gz
-[ ! -f SOURCES/ruby-${RUBY_VERSION}.tar.bz2 ] && wget --no-check-certificate https://ftp.ruby-lang.org/pub/ruby/2.2/ruby-${RUBY_VERSION}.tar.bz2 -O SOURCES/ruby-${RUBY_VERSION}.tar.bz2
-[ ! -f SOURCES/rubygems-${RUBYGEMS_VERSION}.tar.gz ] && wget --no-check-certificate https://rubygems.org/rubygems/rubygems-${RUBYGEMS_VERSION}.tgz -O SOURCES/rubygems-${RUBYGEMS_VERSION}.tar.gz
 
-for vgem in $(cat list_rubygems.txt | grep -v "^#"); do
-	[ ! -f SOURCES/${vgem} ] && wget --no-check-certificate https://rubygems.org/downloads/${vgem} -O SOURCES/${vgem}
-done
+[ ! -f SOURCES/rvm-${RVMVERSION}.tar.gz ] && wget --no-check-certificate https://github.com/rvm/rvm/archive/${RVMVERSION}.tar.gz -O SOURCES/rvm-${RVMVERSION}.tar.gz
+[ ! -f SOURCES/ruby-${RUBYVERSION}.tar.bz2 ] && wget --no-check-certificate https://ftp.ruby-lang.org/pub/ruby/2.2/ruby-${RUBYVERSION}.tar.bz2 -O SOURCES/ruby-${RUBYVERSION}.tar.bz2
+[ ! -f SOURCES/rubygems-${RUBYGEMSVERSION}.tar.gz ] && wget --no-check-certificate https://rubygems.org/rubygems/rubygems-${RUBYGEMSVERSION}.tgz -O SOURCES/rubygems-${RUBYGEMSVERSION}.tar.gz
+
+exit 0
