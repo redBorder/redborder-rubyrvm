@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# redborder-ng basic gems 
+# redborder-ng basic gems
 
 gem 'system-getifaddrs', '~> 0.2.1'
 gem 'prettyprint', '~> 0.0.1'
@@ -14,5 +14,5 @@ gem 'net-ip', '~> 0.0.8'
 gem 'backports', '~> 3.6.8'
 gem 'knife-acl', '~> 1.0.3'
 gem 'symmetric-encryption', '~> 3.8.3'
-gem 'zk', '~> 1.9.6' 
-
+gem 'zk', '~> 1.9.6'
+gem 'rack', '~> 1.5.2'
