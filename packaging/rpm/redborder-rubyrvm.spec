@@ -17,6 +17,7 @@ Source2: bundle-0.0.1.gem
 Source3: chef-12.0.3.gem
 Source4: Gemfile_global
 Source5: Gemfile_web
+
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel git
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
 Requires: sed grep tar gzip bzip2 make file dialog

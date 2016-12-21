@@ -9,7 +9,6 @@ mkdir -p SOURCES
 
 cp Gemfile* SOURCES
 
-# Patch chef gem
 if [ ! -f SOURCES/chef-12.0.3.gem ]; then
 	wget --no-check-certificate https://rubygems.org/downloads/chef-12.0.3.gem -O SOURCES/chef-12.0.3.gem
 	# Patch chef gem
@@ -28,6 +27,7 @@ if [ ! -f SOURCES/chef-12.0.3.gem ]; then
 fi
 
 # Basic packages
+
 [ ! -f SOURCES/rvm-${RVMVERSION}.tar.gz ] && wget --no-check-certificate https://github.com/rvm/rvm/archive/${RVMVERSION}.tar.gz -O SOURCES/rvm-${RVMVERSION}.tar.gz
 [ ! -f SOURCES/ruby-${RUBYVERSION}.tar.bz2 ] && wget --no-check-certificate https://ftp.ruby-lang.org/pub/ruby/2.2/ruby-${RUBYVERSION}.tar.bz2 -O SOURCES/ruby-${RUBYVERSION}.tar.bz2
 [ ! -f SOURCES/rubygems-${RUBYGEMSVERSION}.tar.gz ] && wget --no-check-certificate https://rubygems.org/rubygems/rubygems-${RUBYGEMSVERSION}.tgz -O SOURCES/rubygems-${RUBYGEMSVERSION}.tar.gz
