@@ -1,0 +1,29 @@
+--- a/chef-zero-3.2.1/chef-zero-3.2.1.gemspec	2017-01-10 11:06:01.915949494 -0500
++++ b/chef-zero-3.2.1/chef-zero-3.2.1.gemspec.modified	2017-01-10 10:36:03.400908989 -0500
+@@ -26,7 +26,7 @@
+       s.add_runtime_dependency(%q<hashie>, ["~> 2.0"])
+       s.add_runtime_dependency(%q<uuidtools>, ["~> 2.1"])
+       s.add_runtime_dependency(%q<ffi-yajl>, ["~> 1.1"])
+-      s.add_runtime_dependency(%q<rack>, [">= 0"])
++      s.add_runtime_dependency(%q<rack>, ["= 1.5.5"])
+       s.add_development_dependency(%q<rake>, [">= 0"])
+       s.add_development_dependency(%q<rspec>, [">= 0"])
+     else
+@@ -34,7 +34,7 @@
+       s.add_dependency(%q<hashie>, ["~> 2.0"])
+       s.add_dependency(%q<uuidtools>, ["~> 2.1"])
+       s.add_dependency(%q<ffi-yajl>, ["~> 1.1"])
+-      s.add_dependency(%q<rack>, [">= 0"])
++      s.add_dependency(%q<rack>, ["= 1.5.5"])
+       s.add_dependency(%q<rake>, [">= 0"])
+       s.add_dependency(%q<rspec>, [">= 0"])
+     end
+@@ -43,7 +43,7 @@
+     s.add_dependency(%q<hashie>, ["~> 2.0"])
+     s.add_dependency(%q<uuidtools>, ["~> 2.1"])
+     s.add_dependency(%q<ffi-yajl>, ["~> 1.1"])
+-    s.add_dependency(%q<rack>, [">= 0"])
++    s.add_dependency(%q<rack>, ["= 1.5.5"])
+     s.add_dependency(%q<rake>, [">= 0"])
+     s.add_dependency(%q<rspec>, [">= 0"])
+   end
