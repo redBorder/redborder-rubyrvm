@@ -13,7 +13,7 @@ License: ASL 2.0
 BuildArch: x86_64
 Source0: rvm-%{rvm_version}.tar.gz
 Source1: bundler-1.12.5.gem
-#Source2: bundle-0.0.1.gem
+Source2: bundle-0.0.1.gem
 Source3: chef-12.0.3.gem
 Source4: Gemfile_global
 Source5: Gemfile_web
@@ -68,7 +68,7 @@ default=ruby-%{ruby_version}
 
 # install bundle gem
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/bundler-*.gem
-#%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/bundle-*.gem
+%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/bundle-*.gem
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-zero*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-*.gem --no-ri
 
