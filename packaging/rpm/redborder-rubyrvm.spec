@@ -18,6 +18,8 @@ Source3: chef-12.0.3.gem
 Source4: Gemfile_global
 Source5: Gemfile_web
 Source6: chef-zero-3.2.1.gem
+Source7: Gemfile_global.lock
+Source8: Gemfile_web.lock
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel git
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
