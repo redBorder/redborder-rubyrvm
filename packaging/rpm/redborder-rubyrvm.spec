@@ -72,8 +72,8 @@ default=ruby-%{ruby_version}
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-zero*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-*.gem --no-ri
 
-%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_global
-%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
+%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle install --deployment --gemfile=$RPM_SOURCE_DIR/Gemfile_global
+%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --deployment --gemfile=$RPM_SOURCE_DIR/Gemfile_web
 
 # Remove downloaded gems and files after compilation
 rm -rf %{rvm_dir}/src/*
