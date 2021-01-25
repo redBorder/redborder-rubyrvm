@@ -21,7 +21,7 @@ Source6: chef-zero-3.2.1.gem
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel git
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
-Requires: sed grep tar gzip bzip2 make file dialog
+Requires: sed grep tar gzip bzip2 make file dialog ImageMagick-6.7.8.9
 Obsoletes: rvm
 Summary: Rvm and ruby for redborder platform
 
@@ -118,6 +118,8 @@ getent group rvm >/dev/null || groupadd -r rvm
 #/var/www/rb-rails/Gemfile.lock
 
 %changelog
+* Mon Jan 25 2021 Miguel Negron <manegron@redborder.com> - 0.0.3-1
+- Add ImageMagick specific version as requirement
 * Tue Nov 22 2016 Juan J. Prieto <jjprieto@redborder.com> - 0.0.2-1
 - Integrate all fix and latest gems. Also fix changelog in spec.
 * Fri Nov 18 2016 Juan J. Prieto <jjprieto@redborder.com> - 0.0.1-1
