@@ -20,6 +20,10 @@ if [ ! -f SOURCES/chef-zero-3.2.1.gem ]; then
 	pushd tmp &>/dev/null
 	patch -p1 <../../../../resources/chef-zero_rack_conflict.patch
 	popd &>/dev/null
+        # Patch chef gem for ffi-yajl gem version
+        pushd tmp &>/dev/null
+        patch -p1 <../../../../resources/chef-zero_ffi-yajl.patch
+        popd &>/dev/null
 	pushd tmp/chef-zero-3.2.1 &>/dev/null
 	gem build chef-zero-3.2.1.gemspec
 	popd &>/dev/null
@@ -41,6 +45,10 @@ if [ ! -f SOURCES/chef-12.0.3.gem ]; then
 	# Patch chef gem for rack gem version
 	pushd tmp &>/dev/null
 	patch -p1 <../../../../resources/chef_rack_conflict.patch
+	popd &>/dev/null
+	# Patch chef gem for ffi-yajl gem version
+	pushd tmp &>/dev/null
+	patch -p1 <../../../../resources/chef_ffi-yajl.patch
 	popd &>/dev/null
 	pushd tmp/chef-12.0.3 &>/dev/null
 	gem build chef-12.0.3.gemspec
