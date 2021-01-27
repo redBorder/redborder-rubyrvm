@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # redborder-ng basic gems
 
-gem 'system-getifaddrs', '~> 0.2.1'
+gem 'system-getifaddrs', '= 0.2.1'
 #gem 'prettyprint', '~> 0.0.1'
 gem 'getopt', '~> 1.4.3'
 gem 'netaddr', '~> 1.5.1'
