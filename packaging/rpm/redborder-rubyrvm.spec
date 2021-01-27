@@ -19,10 +19,11 @@ Source4: Gemfile_global
 Source5: Gemfile_web
 Source6: chef-zero-3.2.1.gem
 Source7: prettyprint-0.0.1.gem
+Source8: ruby-2.2.4.tar.bz2
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel = 6.7.8.9 git
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
-Requires: sed grep tar gzip bzip2 make file dialog ImageMagick-6.7.8.9
+Requires: sed grep tar gzip bzip2 make file dialog
 Obsoletes: rvm
 Summary: Rvm and ruby for redborder platform
 
@@ -53,7 +54,7 @@ cp -rf $RPM_SOURCE_DIR/* %{rvm_dir}/archives/
 chgrp -R rvm %{rvm_dir}
 chmod -R g+wxr %{rvm_dir}
 
-%{rvm_dir}/bin/rvm install %{ruby_version}
+%{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{ruby_version}
 
 echo "
 current=ruby-%{ruby_version}
@@ -120,6 +121,10 @@ getent group rvm >/dev/null || groupadd -r rvm
 #/var/www/rb-rails/Gemfile.lock
 
 %changelog
+* Wed Jan 27 2021 Miguel Negron <manegron@redborder.com> - 0.0.5-1
+- Fixing broken dependencies
+* Wed Jan 27 2021 Miguel Negron <manegron@redborder.com> - 0.0.4-1
+- Fixing broken dependencies
 * Mon Jan 25 2021 Miguel Negron <manegron@redborder.com> - 0.0.3-1
 - Add ImageMagick specific version as requirement
 * Tue Nov 22 2016 Juan J. Prieto <jjprieto@redborder.com> - 0.0.2-1
