@@ -17,3 +17,4 @@ gem 'symmetric-encryption', '~> 3.8.3'
 gem 'zk', '~> 1.9.6'
 gem 'cmdparse', '~> 3.0.2'
 gem 'rack', '~> 1.5.5'
+gem "raindrops", "0.17.0"

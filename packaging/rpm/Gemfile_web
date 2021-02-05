@@ -4,6 +4,52 @@ source 'https://rubygems.org'
 gem "rails", "4.0.12"
 gem "railties", "4.0.12"
 
+# list of gems dependencies with predefined version 
+gem "i18n", "0.7.0"
+gem "multi_json", "1.12.1"
+gem "tzinfo", "0.3.52"
+gem "mail", "2.6.4"
+gem "addressable", "2.5.0"
+gem "rails-observers", "0.1.2"
+gem "xml-simple", "1.1.5"
+gem "thread_safe", "0.3.5"
+gem "bcrypt", "3.1.11"  
+gem "coderay", "1.1.1"
+gem "debug_inspector", "0.0.2"
+gem "xpath", "2.0.0"
+gem "uuidtools", "2.1.5"
+gem "diff-lcs", "1.3" 
+gem "highline", "1.7.8"
+gem "mixlib-authentication", "1.4.1"
+gem "mixlib-config", "2.2.4"
+gem "mixlib-shellout", "2.2.7"
+gem "net-ssh-gateway", "1.2.0"
+gem "wmi-lite", "1.0.0"
+gem "method_source", "0.8.2"
+gem "slop", "3.6.0"
+gem "pry", "0.10.4"
+gem "climate_control", "0.1.0"
+gem "thor", "0.19.4"
+gem "warden", "1.2.6"
+gem "net-ldap", "0.15.0"
+gem "unf_ext", "0.0.7.2"
+gem "domain_name", "0.5.20161129"
+gem "httparty", "0.14.0"
+gem "rest-client", "2.0.0"
+gem "eventmachine", "1.2.1"
+gem "multipart-post", "2.0.0"
+gem "faraday", "0.10.1"
+gem "sprockets", "2.12.4"
+gem "jwt", "1.5.6"
+gem "kgio", "2.11.0"
+gem "metaclass", "0.0.4"
+gem "websocket-extensions", "0.1.2"
+gem "websocket-driver", "0.6.4"
+gem "power_assert", "0.4.1"
+gem "raindrops", "0.17.0"
+gem "shoulda-matchers", "2.8.0"
+gem "simplecov-html", "0.10.0"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -17,9 +63,9 @@ group :assets do
 end
 
 # New relic
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', '3.17.2.327'
 
-gem 'jquery-rails', '~> 3.1.2'
+gem 'jquery-rails', '= 3.1.4'
 
 gem 'jquery-ui-rails', '~> 5.0.3'
 
@@ -51,7 +97,7 @@ gem 'turbolinks', " ~> 1.3.1"
 gem 'jquery-turbolinks', "~> 0.2.1"
 
 # Added logs on production
-gem "lograge"
+gem "lograge", "0.4.1"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.0.1'
@@ -60,14 +106,14 @@ gem 'ruby-druid', git: 'https://github.com/redBorder/ruby-druid.git', branch: 'r
 
 gem 'druid_config', '~> 0.5.0'
 
-gem 'oauth2', '~> 1.0'
+gem 'oauth2', '= 1.3.0'
 gem 'zendesk_api', '~> 1.12.1'
 
 gem 'unicorn', '~> 5.0.1'
 
 gem "therubyracer", "~> 0.11.4"
 
-gem "getopt", "~> 1.4.1"
+gem "getopt", "= 1.4.3"
 
 gem "netaddr", "~> 1.5.0"
 
@@ -84,9 +130,9 @@ gem "aws-sdk", "~> 1.61.0"
 gem "aws-s3", "~> 0.6.3"
 
 gem "paperclip", "~> 4.3.7"
-gem 'posix-spawn', '~> 0.3.11'
+gem 'posix-spawn', '= 0.3.13'
 
-gem "dalli", "~> 2.7.0"
+gem "dalli", "= 2.7.6"
 
 gem "dimensions", "~> 1.3.0"
 
@@ -98,7 +144,7 @@ gem "timecop", "~> 0.7.1"
 
 gem 'pg', '~> 0.17.1'
 
-gem 'pry-rails', group: [:development, :test]
+gem 'pry-rails', '0.3.4', group: [:development, :test]
 
 # Gem to push mobile notifications
 gem 'gcm', '~> 0.0.7'
@@ -113,27 +159,27 @@ gem 'rmagick', '~> 2.13.4'
 
 gem 'snmp', '~> 1.2.0'
 
-gem 'snmp4em'
+gem 'snmp4em', '=1.1.3'
 
 gem 'upsert', '~> 2.1.2'
 
 group :development do
-  gem 'nokogiri', '=1.7.0'
+  gem 'nokogiri', '=1.7.0.1'
   gem "better_errors", "~> 0.8.0"
-  gem "binding_of_caller", "~> 0.7.1"
+  gem "binding_of_caller", "= 0.7.2"
   gem "quiet_assets"
   gem "rails_db_info", "~> 0.1.7"
-  gem 'pry-nav'
+  gem 'pry-nav', '=0.2.4'
   gem "mail_view", "~> 2.0.4"
 end
 
 group :test do
-  gem 'sqlite3'
-  gem 'shoulda'
-  gem 'mocha', require: false
+  gem 'sqlite3', '=1.3.13'
+  gem 'shoulda', '=3.5.0'
+  gem 'mocha', '1.2.1', require: false
   gem 'capybara', '~> 2.6.2'
-  gem 'poltergeist'
-  gem 'test-unit'
+  gem 'poltergeist', '1.12.0'
+  gem 'test-unit', '=3.2.3'
   gem 'simplecov', '=0.12.0', require: false
   gem 'public_suffix', '~> 2.0.5'
 end
