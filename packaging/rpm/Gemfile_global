@@ -18,3 +18,4 @@ gem 'zk', '~> 1.9.6'
 gem 'cmdparse', '~> 3.0.2'
 gem 'rack', '~> 1.5.5'
 gem "raindrops", "0.17.0"
+gem 'ruby_dig', '0.0.2'
