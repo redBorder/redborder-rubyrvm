@@ -5,6 +5,8 @@ gem "rails", "4.0.12"
 gem "railties", "4.0.12"
 
 # list of gems dependencies with predefined version 
+gem "http-cookie", "1.0.3"
+gem "execjs", "2.7.0"
 gem "i18n", "0.7.0"
 gem "multi_json", "1.12.1"
 gem "tzinfo", "0.3.52"
