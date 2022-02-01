@@ -21,4 +21,7 @@ gem "raindrops", "0.17.0"
 gem 'ruby_dig', '0.0.2'
 gem 'method_source', '0.9.2'
 gem 'poseidon', '0.0.5'
+gem 'protobuf', '3.8.5'
+gem 'ffi', '1.12.2'
+gem 'ffi-rzmq', '2.0.6'
 gem 'activesupport', '4.2.7.1'
