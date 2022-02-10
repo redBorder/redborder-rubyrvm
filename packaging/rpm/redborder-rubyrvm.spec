@@ -21,7 +21,7 @@ Source6: chef-zero-3.2.1.gem
 Source7: prettyprint-0.0.1.gem
 Source8: ruby-2.2.4.tar.bz2
 Source9: mimemagic-0.3.0.gem
-Source10: redborder-consul-connector-0.0.5.gem
+Source10: redborder-consul-connector-0.0.6.gem
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel = 6.7.8.9 git
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
