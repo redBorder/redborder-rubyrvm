@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7.1'
 gem 'railties', '4.2.7.1'
@@ -16,6 +18,7 @@ group :assets do
   gem 'uglifier', '~> 2.7.2'
 end
 
+gem 'diff-lcs', '=1.4.4'
 gem 'concurrent-ruby', '=1.1.7'
 gem 'tzinfo', '=1.2.7'
 gem 'rails-deprecated_sanitizer', '=1.0.3'
@@ -137,11 +140,23 @@ gem 'snmp4em'
 
 gem 'upsert', '~> 2.1.2'
 
-gem 'rails-observers', '0.1.2' 
+gem 'rails-observers', '0.1.2'
 
 gem 'brakeman','=3.6.1', group: [:development, :test]
 
 gem 'i18n-js','3.6.0'
+
+gem 'diff-lcs','1.4.4'
+
+gem 'request_store','1.5.0'
+
+gem 'rspec-core','3.4.4'
+
+gem 'rspec-expectations','3.4.0'
+
+gem 'rspec-mocks','3.4.1'
+
+gem 'rspec-support','3.4.1'
 
 group :development do
   gem 'nokogiri', '=1.7.0'
@@ -149,8 +164,8 @@ group :development do
   gem "binding_of_caller", "~> 0.7.1"
   gem "quiet_assets"
   gem "rails_db_info", "~> 0.1.7"
-  gem 'pry-rails'
-  gem 'pry-nav'
+  gem 'pry-rails', "~> 0.3.9"
+  gem 'pry-nav', "~> 0.3.0"
   gem "mail_view", "~> 2.0.4"
 end
 
