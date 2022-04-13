@@ -82,7 +82,8 @@ gem 'turbolinks', " ~> 2.3.0"
 gem 'jquery-turbolinks', "~> 0.2.1"
 
 # Added logs on production
-gem "lograge"
+gem "lograge", '0.11.2'
+gem "wmi-lite", '1.0.5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.0.1'
