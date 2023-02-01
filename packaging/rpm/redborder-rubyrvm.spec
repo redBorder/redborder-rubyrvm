@@ -81,6 +81,11 @@ default=ruby-%{ruby_version}
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/ilo-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mimemagic-*.gem --no-ri
 
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/aerospike-*.gem --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ruby-druid-*.gem --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-activerecord-*.gem --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/devise_ldap_authenticatable-*.gem --no-ri
+
 %{rvm_dir}/bin/rvm %{ruby_version}@global do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_global
 %{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
 
