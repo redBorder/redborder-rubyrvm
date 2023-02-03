@@ -108,7 +108,7 @@ mkdir -p $RPM_BUILD_ROOT/var/www/rb-rails
 cp -rf %{rvm_dir}/* $RPM_BUILD_ROOT/%{rvm_dir}/
 cp /etc/profile.d/rvm.sh $RPM_BUILD_ROOT/etc/profile.d/rvm.sh
 cp /etc/rvmrc $RPM_BUILD_ROOT/etc/rvmrc
-#cp $RPM_SOURCE_DIR/Gemfile_web.lock $RPM_BUILD_ROOT/var/www/rb-rails/Gemfile.lock
+cp $RPM_SOURCE_DIR/Gemfile_web.lock $RPM_BUILD_ROOT/var/www/rb-rails/Gemfile.lock
 
 chgrp -R rvm $RPM_BUILD_ROOT/%{rvm_dir}
 chmod -R g+wxr $RPM_BUILD_ROOT/%{rvm_dir}
@@ -133,7 +133,7 @@ getent group rvm >/dev/null || groupadd -r rvm
 %{rvm_dir}
 /etc/rvmrc
 /etc/profile.d/rvm.sh
-#/var/www/rb-rails/Gemfile.lock
+/var/www/rb-rails/Gemfile.lock
 
 %changelog
 * Wed Jan 27 2021 Miguel Negron <manegron@redborder.com> - 0.0.5-1
