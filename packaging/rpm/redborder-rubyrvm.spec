@@ -26,7 +26,8 @@ Source11: ilo-sdk-1.3.1.gem
 Source12: aerospike-2.0.0.gem
 Source13: ruby-druid-0.1.8.gem
 Source14: audited-activerecord-4.0.0.gem
-Source15: devise_ldap_authenticatable-0.8.1.gem
+Source15: audited-4.0.0.gem
+Source16: devise_ldap_authenticatable-0.8.1.gem
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel = 6.7.8.9 git
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
@@ -90,6 +91,7 @@ default=ruby-%{ruby_version}
 
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/aerospike-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ruby-druid-*.gem --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-activerecord-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/devise_ldap_authenticatable-*.gem --no-ri
 

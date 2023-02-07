@@ -135,6 +135,7 @@ gem "dimensions", "~> 1.3.0"
 
 gem "jscolor-rails", "~> 1.4.2.1"
 
+gem "audited", git: "https://github.com/redBorder/audited.git"
 gem "audited-activerecord", git: "https://github.com/redBorder/audited.git"
 
 gem "timecop", "~> 0.7.1"
