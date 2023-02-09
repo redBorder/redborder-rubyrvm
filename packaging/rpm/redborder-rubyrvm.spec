@@ -138,6 +138,8 @@ getent group rvm >/dev/null || groupadd -r rvm
 /var/www/rb-rails/Gemfile.lock
 
 %changelog
+* Thu Feb 09 2023 Luis Blanco <ljblanco@redborder.com> - 0.1.12-1
+- Fixing broken dependencies for the web
 * Wed Jan 27 2021 Miguel Negron <manegron@redborder.com> - 0.0.5-1
 - Fixing broken dependencies
 * Wed Jan 27 2021 Miguel Negron <manegron@redborder.com> - 0.0.4-1
