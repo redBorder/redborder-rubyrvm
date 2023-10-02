@@ -155,7 +155,6 @@ getent group rvm >/dev/null || groupadd -r rvm
 
 %files
 %{rvm_dir}
-%{rvm_dir}/usr
 /etc/rvmrc
 /etc/profile.d/rvm.sh
 /var/www/rb-rails/Gemfile.lock
