@@ -29,10 +29,18 @@ Source14: audited-activerecord-4.0.0.gem
 Source15: audited-4.0.0.gem
 Source16: devise_ldap_authenticatable-0.8.1.gem
 
-BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel ImageMagick-devel = 6.7.8.9 git
+BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel git
+%if 0%{?rhel} < 9
+BuildRequires: ImageMagick-devel = 6.7.8.9
+%endif
+%if 0%{?rhel} >= 9
+BuildRequires: ImageMagick-devel
+%endif
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
 Requires: sed grep tar gzip bzip2 make file dialog
+%if 0%{?rhel} < 9
 Obsoletes: rvm
+%endif
 Summary: Rvm and ruby for redborder platform
 
 %description
@@ -62,7 +70,14 @@ cp -rf $RPM_SOURCE_DIR/* %{rvm_dir}/archives/
 chgrp -R rvm %{rvm_dir}
 chmod -R g+wxr %{rvm_dir}
 
+%if 0%{?rhel} < 9
 %{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{ruby_version}
+%endif
+
+%if 0%{?rhel} >= 9
+%{rvm_dir}/bin/rvm pkg install openssl
+%{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{ruby_version} -C --with-openssl-dir=%{rvm_dir}/usr
+%endif 
 
 echo "
 current=ruby-%{ruby_version}
@@ -85,6 +100,10 @@ default=ruby-%{ruby_version}
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/redborder-consul-connector-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/ilo-*.gem --no-ri
 %{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mimemagic-*.gem --no-ri
+
+export CFLAGS="-Wno-error=format-overflow"
+%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle config build.zookeeper --with-cflags=\"-O2 -pipe -march=native -Wno-error=format-overflow\
+%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install zookeeper -v '1.4.11' -- --with-cflags=\"-O2 -pipe -march=native -Wno-error=format-overflow\"
 
 %{rvm_dir}/bin/rvm %{ruby_version}@global do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_global
 %{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
