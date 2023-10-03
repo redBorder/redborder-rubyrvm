@@ -6,7 +6,9 @@
 %global ruby_version %{__rubyversion}
 %global bundler_version %{__bundlerversion}
 %global rubygems_version %{__rubygemsversion}
-%global __brp_mangle_shebangs_exclude_from test.ru|csvORG2dat.py|generate-darwin-source-and-headers.py
+#global __brp_mangle_shebangs_exclude_from test.ru|generate-darwin-source-and-headers.py|csvORG2dat.py 
+#global __brp_mangle_shebangs_exclude_from %{__rvmdir}
+%undefine __brp_mangle_shebangs
 
 Name: redborder-rubyrvm
 Version: %{__version}
@@ -40,8 +42,8 @@ BuildRequires: ImageMagick-devel = 6.7.8.9
 %if 0%{?rhel} >= 9
 BuildRequires: ImageMagick-devel
 %endif
-BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
-Requires: sed grep tar gzip bzip2 make file dialog ruby perl
+BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel
+Requires: sed grep tar gzip bzip2 make file dialog
 
 Obsoletes: rvm <= %{rvm_version}
 
@@ -125,24 +127,34 @@ rm -rf %{rvm_dir}/archives/*
 
 %install
 rm -rf $RPM_BUILD_ROOT/*
-mkdir -p $RPM_BUILD_ROOT/%{rvm_dir}
+mkdir -p $RPM_BUILD_ROOT%{rvm_dir}
 mkdir -p $RPM_BUILD_ROOT/etc
 mkdir -p $RPM_BUILD_ROOT/etc/profile.d
 mkdir -p $RPM_BUILD_ROOT/var/www/rb-rails
 
-cp -rf %{rvm_dir}/* $RPM_BUILD_ROOT/%{rvm_dir}/
+cp -rf %{rvm_dir}/* $RPM_BUILD_ROOT%{rvm_dir}/
 cp /etc/profile.d/rvm.sh $RPM_BUILD_ROOT/etc/profile.d/rvm.sh
 cp /etc/rvmrc $RPM_BUILD_ROOT/etc/rvmrc
 cp $RPM_SOURCE_DIR/Gemfile_web.lock $RPM_BUILD_ROOT/var/www/rb-rails/Gemfile.lock
 
-chgrp -R rvm $RPM_BUILD_ROOT/%{rvm_dir}
-chmod -R g+wxr $RPM_BUILD_ROOT/%{rvm_dir}
+chgrp -R rvm $RPM_BUILD_ROOT%{rvm_dir}
+chmod -R g+wxr $RPM_BUILD_ROOT%{rvm_dir}
 
 # clean unicorn and /usr/local references
-ruby -p -i -e 'gsub(%r{#!.*/this/will/be/overwritten/or/wrapped/anyways/do/not/worry/ruby}, "#!/usr/bin/ruby")' \
-  $RPM_BUILD_ROOT/%{rvm_dir}/gems/ruby-%{ruby_version}@web/gems/unicorn*/bin/unicorn* &>/dev/null || :
-for f in $(grep -l -r "#\!\s*/usr/local/bin/ruby" $RPM_BUILD_ROOT/%{rvm_dir}); do
-        ruby -p -i -e 'gsub(%r{#!.*/usr/local/bin/ruby}, "#!/usr/bin/ruby")' $f &>/dev/null || :
+for f in $(grep -l -r "#\!\s*/this/will/be/overwritten/or/wrapped/anyways/do/not/worry/ruby" $RPM_BUILD_ROOT%{rvm_dir}); do
+  sed -i 's@#\!\s*/this/will/be/overwritten/or/wrapped/anyways/do/not/worry/ruby@#!/usr/bin/ruby@' "$f" || :
+done
+
+for f in $(grep -l -r "#\!\s*/usr/local/bin/ruby" $RPM_BUILD_ROOT%{rvm_dir}); do
+  sed -i 's@#\!\s*/usr/local/bin/ruby@#!/usr/bin/ruby@' "$f" ||:
+done
+
+for f in $(grep -l -r "#\!\s*/usr/local/bin/macruby" $RPM_BUILD_ROOT%{rvm_dir}); do
+  sed -i 's@#\!\s*/usr/local/bin/macruby@#!/usr/bin/ruby@' "$f" || :
+done
+
+for f in $(grep -l -r "#\!\s*/bin/perl" $RPM_BUILD_ROOT%{rvm_dir}); do
+  sed -i 's@#\!\s*/bin/perl@#!/usr/bin/perl@' "$f" || :
 done
 
 %clean
