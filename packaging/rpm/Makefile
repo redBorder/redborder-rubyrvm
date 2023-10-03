@@ -16,6 +16,8 @@ BUNDLERVERSION?= 1.12.5
 
 RUBYGEMSVERSION?= 2.4.8
 
+RVMDIR?= /usr/lib/rvm
+
 all: rpm
 
 
@@ -38,6 +40,7 @@ srpm: build_prepare
 		-r $(MOCK_CONFIG) \
 		--define "__version $(VERSION)" \
 		--define "__release $(BUILD_NUMBER)" \
+		--define "__rvmdir $(RVMDIR)" \
 		--define "__rvmversion $(RVMVERSION)" \
 		--define "__rubyversion $(RUBYVERSION)" \
 		--define "__bundlerversion $(BUNDLERVERSION)" \
@@ -53,6 +56,7 @@ rpm: srpm
 		-r $(MOCK_CONFIG) \
 		--define "__version $(VERSION)"\
 		--define "__release $(BUILD_NUMBER)"\
+		--define "__rvmdir $(RVMDIR)" \
 		--define "__rvmversion $(RVMVERSION)" \
 		--define "__rubyversion $(RUBYVERSION)" \
 		--define "__bundlerversion $(BUNDLERVERSION)" \

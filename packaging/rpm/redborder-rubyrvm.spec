@@ -1,17 +1,20 @@
 %define debug_package %{nil}
-%global rvm_dir /usr/lib/rvm
+
+%global rvm_dir %{__rvmdir}
 %global rvm_group rvm
 %global rvm_version %{__rvmversion}
 %global ruby_version %{__rubyversion}
 %global bundler_version %{__bundlerversion}
 %global rubygems_version %{__rubygemsversion}
-%global __brp_mangle_shebangs_exclude_from ^/usr/lib/rvm/.*$
+%global __brp_mangle_shebangs_exclude_from test.ru|csvORG2dat.py|generate-darwin-source-and-headers.py
 
 Name: redborder-rubyrvm
 Version: %{__version}
 Release: %{__release}%{?dist}
 License: ASL 2.0
-BuildArch: x86_64
+ExclusiveArch: x86_64
+Summary: Rvm and ruby for redborder platform
+
 Source0: rvm-%{rvm_version}.tar.gz
 Source1: bundler-1.12.5.gem
 Source2: bundle-0.0.1.gem
@@ -38,11 +41,9 @@ BuildRequires: ImageMagick-devel = 6.7.8.9
 BuildRequires: ImageMagick-devel
 %endif
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
-Requires: sed grep tar gzip bzip2 make file dialog
-%if 0%{?rhel} < 9
-Obsoletes: rvm
-%endif
-Summary: Rvm and ruby for redborder platform
+Requires: sed grep tar gzip bzip2 make file dialog ruby perl
+
+Obsoletes: rvm <= %{rvm_version}
 
 %description
 Rvm with ruby, gem, and bundler, packaged as an rpm for redborder platform.
@@ -162,13 +163,18 @@ getent group rvm >/dev/null || groupadd -r rvm
 %changelog
 * Thu Feb 09 2023 Luis Blanco <ljblanco@redborder.com> - 0.1.12-1
 - Fixing broken dependencies for the web
+
 * Wed Jan 27 2021 Miguel Negron <manegron@redborder.com> - 0.0.5-1
 - Fixing broken dependencies
+
 * Wed Jan 27 2021 Miguel Negron <manegron@redborder.com> - 0.0.4-1
 - Fixing broken dependencies
+
 * Mon Jan 25 2021 Miguel Negron <manegron@redborder.com> - 0.0.3-1
 - Add ImageMagick specific version as requirement
+
 * Tue Nov 22 2016 Juan J. Prieto <jjprieto@redborder.com> - 0.0.2-1
 - Integrate all fix and latest gems. Also fix changelog in spec.
+
 * Fri Nov 18 2016 Juan J. Prieto <jjprieto@redborder.com> - 0.0.1-1
 - First commit and version
