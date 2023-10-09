@@ -72,6 +72,8 @@ rvm_archives_path=%{rvm_dir}/archives
 rvm_autolibs_flag=read-fail
 " > /etc/rvmrc
 
+echo "GEM_PATH=\"\$GEM_PATH:/opt/opscode/embedded/service/gem/ruby/2.7.0/:/opt/chef/embedded/lib/ruby/gems/2.6.0/\"" > /etc/profile.d/z_chef_gempath.sh
+
 cp -rf $RPM_SOURCE_DIR/* %{rvm_dir}/archives/
 chgrp -R rvm %{rvm_dir}
 chmod -R g+wxr %{rvm_dir}
@@ -137,6 +139,7 @@ mkdir -p $RPM_BUILD_ROOT/var/www/rb-rails
 cp -rf %{rvm_dir}/* $RPM_BUILD_ROOT%{rvm_dir}/
 cp /etc/profile.d/rvm.sh $RPM_BUILD_ROOT/etc/profile.d/rvm.sh
 cp /etc/rvmrc $RPM_BUILD_ROOT/etc/rvmrc
+cp /etc/profile.d/z_chef_gempath.sh $RPM_BUILD_ROOT/etc/profile.d/z_chef_gempath.sh
 #cp $RPM_SOURCE_DIR/Gemfile_web.lock $RPM_BUILD_ROOT/var/www/rb-rails/Gemfile.lock
 
 chgrp -R rvm $RPM_BUILD_ROOT%{rvm_dir}
@@ -172,6 +175,8 @@ getent group rvm >/dev/null || groupadd -r rvm
 %{rvm_dir}
 /etc/rvmrc
 /etc/profile.d/rvm.sh
+/etc/profile.d/z_chef_gempath.sh
+#/var/www/rb-rails/Gemfile.lock
 
 %changelog
 * Thu Feb 09 2023 Luis Blanco <ljblanco@redborder.com> - 0.1.12-1
