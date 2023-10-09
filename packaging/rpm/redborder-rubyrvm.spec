@@ -20,10 +20,12 @@ Summary: Rvm and ruby for redborder platform
 Source0: rvm-%{rvm_version}.tar.gz
 Source1: bundler-1.12.5.gem
 Source2: bundle-0.0.1.gem
-Source3: chef-12.0.3.gem
+#Source3: chef-12.0.3.gem
+Source3: chef-17.10.0.gem
 Source4: Gemfile_global
 Source5: Gemfile_web
-Source6: chef-zero-3.2.1.gem
+#Source6: chef-zero-3.2.1.gem
+Source6: chef-zero-15.0.11.gem
 Source7: prettyprint-0.0.1.gem
 Source8: ruby-2.2.4.tar.bz2
 Source9: mimemagic-0.3.0.gem
@@ -43,7 +45,7 @@ BuildRequires: ImageMagick-devel = 6.7.8.9
 BuildRequires: ImageMagick-devel
 %endif
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel
-Requires: sed grep tar gzip bzip2 make file dialog
+Requires: sed grep tar gzip bzip2 make file dialog chef
 
 Obsoletes: rvm <= %{rvm_version}
 
@@ -98,12 +100,12 @@ default=ruby-%{ruby_version}
 # install bundle gem
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/bundler-*.gem
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/bundle-*.gem
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-zero*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/prettyprint-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/redborder-consul-connector-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/ilo-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mimemagic-*.gem --no-ri
+%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-zero*.gem --no-doc
+%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-*.gem --no-doc
+%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/prettyprint-*.gem --no-doc
+%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/redborder-consul-connector-*.gem --no-doc
+%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/ilo-*.gem --no-doc
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mimemagic-*.gem --no-doc
 
 %if 0%{rhel} >= 9
 export CFLAGS="-Wno-error=format-overflow"
@@ -112,13 +114,13 @@ export CFLAGS="-Wno-error=format-overflow"
 %endif
 
 %{rvm_dir}/bin/rvm %{ruby_version}@global do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_global
-%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
+#{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
 
-%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/aerospike-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ruby-druid-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-activerecord-*.gem --no-ri
-%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/devise_ldap_authenticatable-*.gem --no-ri
+#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/aerospike-*.gem --no-doc
+#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ruby-druid-*.gem --no-doc
+#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-*.gem --no-doc
+#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-activerecord-*.gem --no-doc
+#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/devise_ldap_authenticatable-*.gem --no-doc
 
 # Remove downloaded gems and files after compilation
 rm -rf %{rvm_dir}/src/*
@@ -135,7 +137,7 @@ mkdir -p $RPM_BUILD_ROOT/var/www/rb-rails
 cp -rf %{rvm_dir}/* $RPM_BUILD_ROOT%{rvm_dir}/
 cp /etc/profile.d/rvm.sh $RPM_BUILD_ROOT/etc/profile.d/rvm.sh
 cp /etc/rvmrc $RPM_BUILD_ROOT/etc/rvmrc
-cp $RPM_SOURCE_DIR/Gemfile_web.lock $RPM_BUILD_ROOT/var/www/rb-rails/Gemfile.lock
+#cp $RPM_SOURCE_DIR/Gemfile_web.lock $RPM_BUILD_ROOT/var/www/rb-rails/Gemfile.lock
 
 chgrp -R rvm $RPM_BUILD_ROOT%{rvm_dir}
 chmod -R g+wxr $RPM_BUILD_ROOT%{rvm_dir}
@@ -170,7 +172,6 @@ getent group rvm >/dev/null || groupadd -r rvm
 %{rvm_dir}
 /etc/rvmrc
 /etc/profile.d/rvm.sh
-/var/www/rb-rails/Gemfile.lock
 
 %changelog
 * Thu Feb 09 2023 Luis Blanco <ljblanco@redborder.com> - 0.1.12-1
