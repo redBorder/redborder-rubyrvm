@@ -6,8 +6,6 @@
 %global ruby_version %{__rubyversion}
 %global bundler_version %{__bundlerversion}
 %global rubygems_version %{__rubygemsversion}
-#global __brp_mangle_shebangs_exclude_from test.ru|generate-darwin-source-and-headers.py|csvORG2dat.py 
-#global __brp_mangle_shebangs_exclude_from %{__rvmdir}
 %undefine __brp_mangle_shebangs
 
 Name: redborder-rubyrvm
@@ -18,34 +16,18 @@ ExclusiveArch: x86_64
 Summary: Rvm and ruby for redborder platform
 
 Source0: rvm-%{rvm_version}.tar.gz
-Source1: bundler-1.12.5.gem
-Source2: bundle-0.0.1.gem
-#Source3: chef-12.0.3.gem
-Source3: chef-17.10.0.gem
-Source4: Gemfile_global
-Source5: Gemfile_web
-#Source6: chef-zero-3.2.1.gem
-Source6: chef-zero-15.0.11.gem
-Source7: prettyprint-0.0.1.gem
-Source8: ruby-2.2.4.tar.bz2
-Source9: mimemagic-0.3.0.gem
-Source10: redborder-consul-connector-0.0.6.gem
-Source11: ilo-sdk-1.3.1.gem
-Source12: aerospike-2.0.0.gem
-Source13: ruby-druid-0.1.8.gem
-Source14: audited-activerecord-4.0.0.gem
-Source15: audited-4.0.0.gem
-Source16: devise_ldap_authenticatable-0.8.1.gem
+Source1: Gemfile_global
+Source2: Gemfile_web
+Source3: prettyprint-0.0.1.gem
+Source4: redborder-consul-connector-0.0.6.gem
+Source5: ilo-sdk-1.3.1.gem
+Source6: ruby-druid-0.1.8.gem
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel git
-%if 0%{?rhel} < 9
-BuildRequires: ImageMagick-devel = 6.7.8.9
-%endif
-%if 0%{?rhel} >= 9
 BuildRequires: ImageMagick-devel
-%endif
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel
-Requires: sed grep tar gzip bzip2 make file dialog chef
+
+Requires: sed grep tar gzip bzip2 make file dialog
 
 Obsoletes: rvm <= %{rvm_version}
 
@@ -78,51 +60,32 @@ cp -rf $RPM_SOURCE_DIR/* %{rvm_dir}/archives/
 chgrp -R rvm %{rvm_dir}
 chmod -R g+wxr %{rvm_dir}
 
-%if 0%{?rhel} < 9
-%{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{ruby_version}
-%endif
-
-%if 0%{?rhel} >= 9
+# Install ruby version within rvm
 %{rvm_dir}/bin/rvm pkg install openssl
 %{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{ruby_version} -C --with-openssl-dir=%{rvm_dir}/usr
-%endif 
 
+# Setup default ruby version
 echo "
 current=ruby-%{ruby_version}
 default=ruby-%{ruby_version}
 " > %{rvm_dir}/config/alias
-
 %{rvm_dir}/bin/rvm all do rvm use %{ruby_version} --default
 
-%{rvm_dir}/bin/rvm all do ruby --version
+# Setup CFLAGS
+export CFLAGS="-Wno-error=format-overflow"
 
-# Create web gemset
-%{rvm_dir}/bin/rvm all do rvm gemset create web
-
-# install bundle gem
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/bundler-*.gem
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/bundle-*.gem
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-zero*.gem --no-doc
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/chef-*.gem --no-doc
+# Install global gems
+%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle config build.zookeeper --with-cflags="-O2 -pipe -march=native -Wno-error=format-overflow"
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/prettyprint-*.gem --no-doc
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/redborder-consul-connector-*.gem --no-doc
 %{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/ilo-*.gem --no-doc
-%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/mimemagic-*.gem --no-doc
-
-%if 0%{rhel} >= 9
-export CFLAGS="-Wno-error=format-overflow"
-%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle config build.zookeeper --with-cflags="-O2 -pipe -march=native -Wno-error=format-overflow"
-%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle config build.zookeeper --with-cflags="-O2 -pipe -march=native -Wno-error=format-overflow"
-%endif
-
 %{rvm_dir}/bin/rvm %{ruby_version}@global do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_global
-#{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
 
-#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/aerospike-*.gem --no-doc
-#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ruby-druid-*.gem --no-doc
-#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-*.gem --no-doc
-#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/audited-activerecord-*.gem --no-doc
-#{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/devise_ldap_authenticatable-*.gem --no-doc
+# Install web gems
+%{rvm_dir}/bin/rvm all do rvm gemset create web
+%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle config build.zookeeper --with-cflags="-O2 -pipe -march=native -Wno-error=format-overflow"
+%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ruby-druid-*.gem --no-doc
+%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
 
 # Remove downloaded gems and files after compilation
 rm -rf %{rvm_dir}/src/*
@@ -140,12 +103,13 @@ cp -rf %{rvm_dir}/* $RPM_BUILD_ROOT%{rvm_dir}/
 cp /etc/profile.d/rvm.sh $RPM_BUILD_ROOT/etc/profile.d/rvm.sh
 cp /etc/rvmrc $RPM_BUILD_ROOT/etc/rvmrc
 cp /etc/profile.d/z_chef_gempath.sh $RPM_BUILD_ROOT/etc/profile.d/z_chef_gempath.sh
-#cp $RPM_SOURCE_DIR/Gemfile_web.lock $RPM_BUILD_ROOT/var/www/rb-rails/Gemfile.lock
+cp $RPM_SOURCE_DIR/Gemfile_web.lock $RPM_BUILD_ROOT/var/www/rb-rails/Gemfile.lock
 
+# Configure rvm files permissions
 chgrp -R rvm $RPM_BUILD_ROOT%{rvm_dir}
 chmod -R g+wxr $RPM_BUILD_ROOT%{rvm_dir}
 
-# clean unicorn and /usr/local references
+# Fix slangs
 for f in $(grep -l -r "#\!\s*/this/will/be/overwritten/or/wrapped/anyways/do/not/worry/ruby" $RPM_BUILD_ROOT%{rvm_dir}); do
   sed -i 's@#\!\s*/this/will/be/overwritten/or/wrapped/anyways/do/not/worry/ruby@#!/usr/bin/ruby@' "$f" || :
 done
@@ -176,7 +140,7 @@ getent group rvm >/dev/null || groupadd -r rvm
 /etc/rvmrc
 /etc/profile.d/rvm.sh
 /etc/profile.d/z_chef_gempath.sh
-#/var/www/rb-rails/Gemfile.lock
+/var/www/rb-rails/Gemfile.lock
 
 %changelog
 * Thu Feb 09 2023 Luis Blanco <ljblanco@redborder.com> - 0.1.12-1
