@@ -25,7 +25,7 @@ Source6: ruby-druid-0.1.8.gem
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel git
 BuildRequires: ImageMagick-devel
-BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel
+BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
 
 Requires: sed grep tar gzip bzip2 make file dialog
 
@@ -57,6 +57,7 @@ rvm_autolibs_flag=read-fail
 cp -rf $RPM_SOURCE_DIR/* %{rvm_dir}/archives/
 chgrp -R rvm %{rvm_dir}
 chmod -R g+wxr %{rvm_dir}
+chmod -x %{rvm_dir}/hooks/after_use_textmate || :
 
 # Install ruby version within rvm
 %{rvm_dir}/bin/rvm pkg install openssl
@@ -129,6 +130,7 @@ done
 getent group rvm >/dev/null || groupadd -r rvm
 
 %post
+chmod -x %{rvm_dir}/hooks/after_use_textmate || :
 /bin/bash --login -c "rvm use %{ruby_version} --default" || :
 /bin/bash --login -c "rvm gemset use global --default" || :
 
@@ -137,6 +139,7 @@ getent group rvm >/dev/null || groupadd -r rvm
 /etc/rvmrc
 /etc/profile.d/rvm.sh
 /var/www/rb-rails/Gemfile.lock
+%attr(0644, root, root) %{rvm_dir}/hooks/after_use_textmate
 
 %changelog
 * Thu Feb 09 2023 Luis Blanco <ljblanco@redborder.com> - 0.1.12-1

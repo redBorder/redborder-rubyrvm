@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'test-unit'
 gem 'rails', '>= 5.0.0.rc2', '< 5.1'
 
+gem 'rake', '13.0.6'
+
 # Ruby 2.7 has removed these gems which were default in prior versions
 # Read more: https://deepakmahakale.com/blog/2020/07/04/guide-to-upgrade-rails-application.html
 gem 'e2mmap'
