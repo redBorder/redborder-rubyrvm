@@ -145,7 +145,7 @@ gem 'pg' #, '~> 0.17.1'
 
 gem "ditto_code", "~> 0.3.5"
 
-gem 'wicked_pdf', '~> 0.11.0'
+gem 'wicked_pdf', '~> 2.7'
 
 gem 'rmagick', '~> 2.16.0'
 
