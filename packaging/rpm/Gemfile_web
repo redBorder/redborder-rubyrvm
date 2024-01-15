@@ -149,9 +149,9 @@ gem 'zip-zip', '=0.3'
 
 gem 'rails-observers', '=0.1.5'
 
-# gem 'brakeman','=3.6.1', group: [:development, :test]
-
 gem 'i18n-js','=3.6.0'
+
+# gem 'brakeman','=3.6.1', group: [:development, :test]
 
 # group :development do
 #   gem 'loofah' #, '=2.6.0'
