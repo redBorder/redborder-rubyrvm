@@ -144,6 +144,9 @@ chmod -x %{rvm_dir}/hooks/after_use_textmate || :
 %attr(0644, root, root) %{rvm_dir}/hooks/after_use_textmate
 
 %changelog
+* Wed Jan 17 2023 Miguel Negrón <manegron@redborder.com> - 0.2.0-1
+- Update wicked_pdf and fix gem versions
+
 * Thu Feb 09 2023 Luis Blanco <ljblanco@redborder.com> - 0.1.12-1
 - Fixing broken dependencies for the web
 
