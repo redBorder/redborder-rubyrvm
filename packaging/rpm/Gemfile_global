@@ -23,3 +23,4 @@ gem 'poseidon', '=0.0.5'
 gem 'protobuf', '3.8.5'
 gem "dalli", "= 2.7.10"
 gem 'ilo-sdk'
+gem 'easycache', "=0.0.2"
