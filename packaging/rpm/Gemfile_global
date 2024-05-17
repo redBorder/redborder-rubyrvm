@@ -20,7 +20,9 @@ gem 'zk', '1.9.6'
 gem 'cmdparse', '~> 3.0.2'
 gem "raindrops", "0.17.0"
 gem 'poseidon', '=0.0.5'
-gem 'protobuf', '3.8.5'
+gem 'protobuf', '3.10.9'
+gem 'ruby_dig', '0.0.2'
+gem 'ffi-rzmq', '2.0.6'
 gem "dalli", "= 2.7.10"
 gem 'ilo-sdk'
 gem 'easycache', "=0.0.2"
