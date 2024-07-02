@@ -51,6 +51,8 @@ gem 'jquery-ui-rails', '=5.0.5'
 # Devise rails4 branch
 gem 'devise', '=4.9.3'
 #gem 'devise_ldap_authenticatable', git: 'https://github.com/redBorder/devise_ldap_authenticatable.git'
+gem 'ruby-saml', '=> 1.16.0'
+gem 'devise_saml_authenticatable', '=>1.9.1'
 
 gem 'simple_form', '=5.0.3'
 
