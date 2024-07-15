@@ -26,3 +26,7 @@ gem 'ffi-rzmq', '2.0.6'
 gem "dalli", "= 2.7.10"
 gem 'ilo-sdk'
 gem 'easycache', "=0.0.2"
+
+# assets inventory
+gem 'resolv', '0.4.0'
+gem 'pg', '1.5.6'
