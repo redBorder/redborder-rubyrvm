@@ -152,6 +152,8 @@ gem 'rails-observers', '=0.1.5'
 
 gem 'i18n-js','=3.6.0'
 
+gem 'acts_as_list', '=1.1.0'
+
 gem 'brakeman','=3.6.1', group: [:development, :test]
 
 group :development do
