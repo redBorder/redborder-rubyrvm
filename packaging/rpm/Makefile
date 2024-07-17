@@ -34,6 +34,7 @@ build_prepare: archive
 	mkdir -p $(RESULT_DIR)
 	rm -f $(RESULT_DIR)/$(PACKAGE_NAME)*.rpm
 	env RVMVERSION=$(RVMVERSION) RUBYVERSION=$(RUBYVERSION) BUNDLERVERSION=$(BUNDLERVERSION) RUBYGEMSVERSION=$(RUBYGEMSVERSION) ./download_gems.sh;
+	./download_makerpm_gems.sh
 
 srpm: build_prepare
 	/usr/bin/mock \
