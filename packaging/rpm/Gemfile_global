@@ -26,3 +26,4 @@ gem 'ffi-rzmq', '2.0.6'
 gem "dalli", "= 2.7.10"
 gem 'ilo-sdk'
 gem 'easycache', "=0.0.2"
+gem 'iso8601', '0.13.0'
