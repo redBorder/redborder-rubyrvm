@@ -60,6 +60,7 @@ chmod -R g+wxr %{rvm_dir}
 chmod -x %{rvm_dir}/hooks/after_use_textmate || :
 
 # Install ruby version within rvm
+echo "export rvm_max_time_flag=20" >> ~/.rvmrc
 %{rvm_dir}/bin/rvm pkg install openssl
 %{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{ruby_version} -C --with-openssl-dir=%{rvm_dir}/usr
 
