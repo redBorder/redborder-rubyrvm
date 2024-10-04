@@ -1,4 +1,4 @@
-source 'http://geminabox.redborder.com'
+source 'https://geminabox.redborder.com'
 # source 'https://rubygems.org'
 
 # redborder-ng basic gems
@@ -29,4 +29,5 @@ gem 'easycache', "=0.0.2"
 gem 'pg', '=1.5.4'
 gem 'iso8601', '=0.8.7'
 gem 'nokogiri' #, '=1.7.0'
-gem 'aws-sdk-v1', '=1.61.0'
+gem 'aws-sdk', '=1.61.0'
+gem 'aws-s3', '=0.6.3'
