@@ -26,3 +26,7 @@ gem 'ffi-rzmq', '2.0.6'
 gem "dalli", "= 2.7.10"
 gem 'ilo-sdk'
 gem 'easycache', "=0.0.2"
+gem 'pg', '=1.5.4'
+gem 'iso8601', '=0.8.7'
+gem 'nokogiri' #, '=1.7.0'
+gem 'aws-sdk-v1', '=1.61.0'
