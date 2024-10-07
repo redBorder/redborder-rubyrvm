@@ -12,7 +12,7 @@ GEMS=(
 )
 
 # Define the host URL
-GEMINABOX_HOST="http://geminabox.redborder.com/gems/"
+GEMINABOX_HOST="https://geminabox.redborder.com/gems/"
 
 # Define the target directory
 TARGET_DIR="${SCRIPT_DIR}/SOURCES"
