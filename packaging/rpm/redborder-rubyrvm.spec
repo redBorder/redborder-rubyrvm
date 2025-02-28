@@ -21,7 +21,7 @@ Source2: Gemfile_web
 Source3: prettyprint-0.0.1.gem
 Source4: redborder-consul-connector-0.0.6.gem
 Source5: ilo-sdk-1.3.1.gem
-Source6: ruby-druid-0.1.8.gem
+Source6: ruby-druid-0.1.10.gem
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel git
 BuildRequires: ImageMagick-devel
