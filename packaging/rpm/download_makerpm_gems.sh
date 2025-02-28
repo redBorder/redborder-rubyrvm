@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Define the list of gems
 GEMS=(
-  "ruby-druid-0.1.8.gem"
+  "ruby-druid-0.1.10.gem"
   "ilo-sdk-1.3.1.gem"
   "redborder-consul-connector-0.0.6.gem"
   "prettyprint-0.0.1.gem"
