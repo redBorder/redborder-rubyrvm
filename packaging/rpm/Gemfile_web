@@ -90,7 +90,7 @@ gem 'jbuilder', '=2.11.5'
 
 gem 'ruby-druid', git: 'https://github.com/redBorder/ruby-druid.git', branch: 'rb-0.1.10' #'~> 0.1.10'
 
-gem 'druid_config', '=0.5.0'
+gem 'druid_config', '=1.0.0'
 
 gem 'oauth2', '=1.4.11'
 gem 'zendesk_api', '=1.12.1'
