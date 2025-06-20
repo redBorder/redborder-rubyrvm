@@ -160,6 +160,10 @@ gem 'trix-rails', '=2.4.0'
 
 gem 'brakeman','=3.6.1', group: [:development, :test]
 
+gem 'combine_pdf', '= 1.0.26'
+gem 'matrix', '= 0.4.2'
+gem 'ruby-rc4', '= 0.1.5'
+
 group :development do
   gem 'loofah' #, '=2.6.0'
   gem 'nokogiri' #, '=1.7.0'
