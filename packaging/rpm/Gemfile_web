@@ -80,7 +80,7 @@ gem 'jquery-turbolinks', '=2.1.0'
 gem 'bcrypt', '=3.1.15'
 
 # RAILS5
-# gem 'aerospike', git: 'https://github.com/redBorder/aerospike-client-ruby.git' #'~> 1.0.7'
+gem 'aerospike', git: 'https://github.com/redBorder/aerospike-client-ruby.git' #'~> 1.0.7'
 
 # Added logs on production
 gem "lograge", '=0.11.2'
