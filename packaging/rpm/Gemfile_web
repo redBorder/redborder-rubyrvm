@@ -162,6 +162,9 @@ gem 'combine_pdf', '= 1.0.26'
 gem 'matrix', '= 0.4.2'
 gem 'ruby-rc4', '= 0.1.5'
 
+gem 'kramdown', '= 2.5.1'
+gem 'kramdown-parser-gfm', '=1.1.0'
+
 group :development do
   gem 'loofah' #, '=2.6.0'
   gem 'nokogiri' #, '=1.7.0'
