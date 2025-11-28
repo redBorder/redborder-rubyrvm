@@ -76,7 +76,7 @@ gem 'turbolinks', '=2.3.0'
 # Throws a ready event when turbolinks finishes loading a page
 gem 'jquery-turbolinks', '=2.1.0'
 
-# gem 'rinruby', git: 'https://github.com/redBorder/rinruby.git'
+gem 'rinruby', git: 'https://github.com/redBorder/rinruby.git'
 gem 'bcrypt', '=3.1.15'
 
 # RAILS5
