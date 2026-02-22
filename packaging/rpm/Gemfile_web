@@ -35,6 +35,7 @@ gem 'mini_mime', '=1.0.2'
 
 # Send messages to Kafka
 gem 'poseidon', '=0.0.5'
+gem 'ruby-kafka', '=1.5.0'
 
 gem 'concurrent-ruby', '=1.1.7'
 
