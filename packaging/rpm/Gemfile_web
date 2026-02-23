@@ -48,6 +48,8 @@ gem 'jquery-ui-rails', '=5.0.5'
 
 # Devise rails4 branch
 gem 'devise', '=4.9.3'
+gem 'rotp', '=6.3.0'
+gem 'rqrcode', '=2.2.0'
 # gem 'devise_ldap_authenticatable', git: 'https://github.com/redBorder/devise_ldap_authenticatable.git'
 
 gem 'ruby-saml', '=1.16.0'
