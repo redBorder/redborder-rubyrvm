@@ -8,6 +8,8 @@
 %global rubygems_version %{__rubygemsversion}
 %undefine __brp_mangle_shebangs
 
+%global __requires_exclude ^libMagick.*\\.so.*$
+
 Name: redborder-rubyrvm
 Version: %{__version}
 Release: %{__release}%{?dist}
@@ -27,7 +29,7 @@ BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgr
 BuildRequires: ImageMagick-devel
 BuildRequires: gcc-c++ patch readline readline-devel zlib-devel openssl-devel procps-ng sqlite-devel ruby
 
-Requires: sed grep tar gzip bzip2 make file dialog
+Requires: sed grep tar gzip bzip2 make file dialog ImageMagick
 
 Obsoletes: rvm <= %{rvm_version}
 
