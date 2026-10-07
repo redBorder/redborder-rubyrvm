@@ -8,6 +8,10 @@
 %global bundler_version %{__bundlerversion}
 %global rubygems_version %{__rubygemsversion}
 %undefine __brp_mangle_shebangs
+# libv8-node (the JS runtime of the webui) ships a prebuilt static V8. The
+# post-install strip scripts unpack that archive and fail on it
+%global __brp_strip_lto %{nil}
+%global __brp_strip_static_archive %{nil}
 
 %global __requires_exclude ^libMagick.*\\.so.*$
 
