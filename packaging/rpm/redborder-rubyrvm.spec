@@ -26,6 +26,10 @@ Source0: rvm-%{rvm_version}.tar.gz
 Source1: Gemfile_global
 Source2: Gemfile_web
 Source7: Gemfile_web_ruby27
+# Lockfiles of the two ruby-%{ruby_version} bundles: they are frozen, so the gems
+# uploaded to geminabox for newer rubies do not change them
+Source8: Gemfile_global.lock
+Source9: Gemfile_web_ruby27.lock
 Source3: prettyprint-0.0.1.gem
 Source4: redborder-consul-connector-0.0.6.gem
 Source5: ilo-sdk-1.3.1.gem
