@@ -12,6 +12,9 @@ RVMVERSION?= 1.29.12
 
 RUBYVERSION?=2.7.5
 
+# Ruby used by the webui (Rails 8). The platform scripts keep using RUBYVERSION
+WEBRUBYVERSION?=3.4.11
+
 BUNDLERVERSION?= 2.4.21
 
 RUBYGEMSVERSION?= 2.4.8
@@ -33,7 +36,7 @@ archive: SOURCES
 build_prepare: archive
 	mkdir -p $(RESULT_DIR)
 	rm -f $(RESULT_DIR)/$(PACKAGE_NAME)*.rpm
-	env RVMVERSION=$(RVMVERSION) RUBYVERSION=$(RUBYVERSION) BUNDLERVERSION=$(BUNDLERVERSION) RUBYGEMSVERSION=$(RUBYGEMSVERSION) ./download_gems.sh;
+	env RVMVERSION=$(RVMVERSION) RUBYVERSION=$(RUBYVERSION) WEBRUBYVERSION=$(WEBRUBYVERSION) BUNDLERVERSION=$(BUNDLERVERSION) RUBYGEMSVERSION=$(RUBYGEMSVERSION) ./download_gems.sh;
 	./download_makerpm_gems.sh
 
 srpm: build_prepare
@@ -44,6 +47,7 @@ srpm: build_prepare
 		--define "__rvmdir $(RVMDIR)" \
 		--define "__rvmversion $(RVMVERSION)" \
 		--define "__rubyversion $(RUBYVERSION)" \
+		--define "__webrubyversion $(WEBRUBYVERSION)" \
 		--define "__bundlerversion $(BUNDLERVERSION)" \
 		--define "__rubygemsversion $(RUBYGEMSVERSION)" \
 		--resultdir=$(RESULT_DIR) \
@@ -61,6 +65,7 @@ rpm: srpm
 		--define "__rvmdir $(RVMDIR)" \
 		--define "__rvmversion $(RVMVERSION)" \
 		--define "__rubyversion $(RUBYVERSION)" \
+		--define "__webrubyversion $(WEBRUBYVERSION)" \
 		--define "__bundlerversion $(BUNDLERVERSION)" \
 		--define "__rubygemsversion $(RUBYGEMSVERSION)" \
 		--resultdir=$(RESULT_DIR) \
