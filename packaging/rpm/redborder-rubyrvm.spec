@@ -4,7 +4,6 @@
 %global rvm_group rvm
 %global rvm_version %{__rvmversion}
 %global ruby_version %{__rubyversion}
-%global web_ruby_version %{__webrubyversion}
 %global bundler_version %{__bundlerversion}
 %global rubygems_version %{__rubygemsversion}
 %undefine __brp_mangle_shebangs
@@ -25,15 +24,8 @@ Summary: Rvm and ruby for redborder platform
 Source0: rvm-%{rvm_version}.tar.gz
 Source1: Gemfile_global
 Source2: Gemfile_web
-Source7: Gemfile_web_ruby27
-# Lockfiles of the two ruby-%{ruby_version} bundles: they are frozen, so the gems
-# uploaded to geminabox for newer rubies do not change them
-Source8: Gemfile_global.lock
-Source9: Gemfile_web_ruby27.lock
-Source3: prettyprint-0.0.1.gem
-Source4: redborder-consul-connector-0.0.6.gem
-Source5: ilo-sdk-1.3.1.gem
-Source6: ruby-druid-0.1.10.gem
+# The global bundle is locked: the gems uploaded to geminabox later do not change it
+Source3: Gemfile_global.lock
 
 BuildRequires: libyaml-devel libffi-devel autoconf automake libtool bison postgresql-devel git
 BuildRequires: ImageMagick-devel
@@ -45,8 +37,8 @@ Obsoletes: rvm <= %{rvm_version}
 
 %description
 Rvm with ruby, gem, and bundler, packaged as an rpm for redborder platform.
-System level install. Versions: ruby-%{ruby_version} (default, platform scripts),
-ruby-%{web_ruby_version} (webui), bundler-%{bundler_version} and rubygems-%{rubygems_version}
+System level install. Versions: ruby-%{ruby_version} (gemsets global for the platform
+scripts and web for the webui), bundler-%{bundler_version} and rubygems-%{rubygems_version}
 
 %prep
 %setup -q -n rvm-%{rvm_version}
@@ -71,9 +63,8 @@ chgrp -R rvm %{rvm_dir}
 chmod -R g+wxr %{rvm_dir}
 chmod -x %{rvm_dir}/hooks/after_use_textmate || :
 
-# Install ruby version within rvm
-%{rvm_dir}/bin/rvm pkg install openssl
-%{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{ruby_version} -C --with-openssl-dir=%{rvm_dir}/usr
+# Install ruby within rvm. It is built against the system openssl 3
+%{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{ruby_version} -C --with-openssl-dir=/usr
 
 # Setup default ruby version
 echo "
@@ -84,35 +75,15 @@ default=ruby-%{ruby_version}
 
 # Setup CFLAGS
 export CFLAGS="-Wno-error=format-overflow"
+%{rvm_dir}/bin/rvm %{ruby_version} do bundle config set build.zookeeper --with-cflags="-O2 -pipe -march=native -Wno-error=format-overflow"
+%{rvm_dir}/bin/rvm %{ruby_version} do bundle config set without 'development test'
 
-# Install global gems
-%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle config build.zookeeper --with-cflags="-O2 -pipe -march=native -Wno-error=format-overflow"
-%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle config without development test
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/prettyprint-*.gem --no-doc
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/redborder-consul-connector-*.gem --no-doc
-%{rvm_dir}/bin/rvm %{ruby_version}@global do gem install %{rvm_dir}/archives/ilo-*.gem --no-doc
-%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_global --without development test
+# Install global gems (ruby-%{ruby_version}@global): the platform scripts
+%{rvm_dir}/bin/rvm %{ruby_version}@global do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_global
 
-# Install the legacy web gems (ruby-%{ruby_version}@web). The webui does not use
-# them any more, but some platform scripts still run on this gemset
-%{rvm_dir}/bin/rvm all do rvm gemset create web
-%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle config build.zookeeper --with-cflags="-O2 -pipe -march=native -Wno-error=format-overflow"
-%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle config without development test
-%{rvm_dir}/bin/rvm %{ruby_version}@web do gem install %{rvm_dir}/archives/ruby-druid-*.gem --no-doc
-%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web_ruby27 --without development test
-
-# Install the ruby of the webui (Rails 8 needs ruby >= 3.3). It is built against
-# the system openssl 3: the openssl 1.0 of "rvm pkg" is too old for it
-%{rvm_dir}/bin/rvm --verify-downloads 2 --disable-binary install %{web_ruby_version} -C --with-openssl-dir=/usr
-
-# Install web gems (ruby-%{web_ruby_version}@web)
-%{rvm_dir}/bin/rvm %{web_ruby_version} do rvm gemset create web
-%{rvm_dir}/bin/rvm %{web_ruby_version}@web do bundle config set build.zookeeper --with-cflags="-O2 -pipe -march=native -Wno-error=format-overflow"
-%{rvm_dir}/bin/rvm %{web_ruby_version}@web do bundle config set without 'development test'
-%{rvm_dir}/bin/rvm %{web_ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
-
-# The default ruby is still the one of the platform
-%{rvm_dir}/bin/rvm all do rvm use %{ruby_version} --default
+# Install web gems (ruby-%{ruby_version}@web): the webui
+%{rvm_dir}/bin/rvm %{ruby_version} do rvm gemset create web
+%{rvm_dir}/bin/rvm %{ruby_version}@web do bundle install --gemfile=$RPM_SOURCE_DIR/Gemfile_web
 
 # Remove downloaded gems and files after compilation
 rm -rf %{rvm_dir}/src/*
@@ -170,6 +141,9 @@ chmod -x %{rvm_dir}/hooks/after_use_textmate || :
 %attr(0644, root, root) %{rvm_dir}/hooks/after_use_textmate
 
 %changelog
+* Wed Oct 14 2026 Miguel Negron <manegron@redborder.com> - 4.0.0-1
+- Remove ruby 2.7.5: ruby 3.4.11 is the only ruby, with the gemsets global (platform scripts) and web (webui)
+
 * Wed Oct 07 2026 Miguel Negron <manegron@redborder.com> - 3.0.0-1
 - Add ruby 3.4.11 with the web gemset for the webui on Rails 8. Ruby 2.7.5 stays as default
 
