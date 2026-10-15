@@ -112,7 +112,7 @@ gem 'druid_config', '=1.0.0'
 gem 'oauth2', '=2.0.25'
 gem 'zendesk_api', '=1.37.0'
 
-gem 'unicorn', '=6.1.0'
+gem 'puma', '=7.1.0'
 
 # JS runtime for ExecJS (therubyracer does not build on current rubies)
 gem 'mini_racer', '=0.22.1'
