@@ -1,4 +1,7 @@
 %define debug_package %{nil}
+# Do not ship /usr/lib/.build-id links: the precompiled gems (nokogiri...) are byte-identical to
+# the ones in cinc-workstation, so both packages would own the same links and conflict
+%global _build_id_links none
 
 %global rvm_dir %{__rvmdir}
 %global rvm_group rvm
@@ -141,6 +144,9 @@ chmod -x %{rvm_dir}/hooks/after_use_textmate || :
 %attr(0644, root, root) %{rvm_dir}/hooks/after_use_textmate
 
 %changelog
+* Wed Nov 25 2026 Miguel Negrón <manegron@redborder.com>
+- Do not ship /usr/lib/.build-id links: they conflict with cinc-workstation (same precompiled nokogiri)
+
 * Wed Oct 14 2026 Miguel Negron <manegron@redborder.com> - 4.0.0-1
 - Remove ruby 2.7.5: ruby 3.4.11 is the only ruby, with the gemsets global (platform scripts) and web (webui)
 
